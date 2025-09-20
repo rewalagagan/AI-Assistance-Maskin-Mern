@@ -108,7 +108,19 @@ export const generateBotResponse = (userMessage: string): string => {
   // Handle MERN stack category requests
   if (lowerMessage.includes('mern categories') || lowerMessage.includes('mern topics')) {
     const categories = getMernCategories();
-    return `📚 **MERN Stack Knowledge Base**\n\nI have comprehensive knowledge about:\n\n🍃 **MongoDB**: ${categories.mongodb} questions\n⚡ **Express.js**: ${categories.express} questions\n⚛️ **React**: ${categories.react} questions\n🟢 **Node.js**: ${categories.nodejs} questions\n🔧 **General MERN**: ${categories.general} questions\n\n**Total: ${Object.values(categories).reduce((a, b) => a + b, 0)} questions available!**\n\nAsk me anything about MERN stack development!`;
+    return `# 📚 MERN Stack Knowledge Base
+
+I have comprehensive knowledge about:
+
+- 🍃 **MongoDB**: ${categories.mongodb} questions
+- ⚡ **Express.js**: ${categories.express} questions  
+- ⚛️ **React**: ${categories.react} questions
+- 🟢 **Node.js**: ${categories.nodejs} questions
+- 🔧 **General MERN**: ${categories.general} questions
+
+**Total: ${Object.values(categories).reduce((a, b) => a + b, 0)} questions available!**
+
+Ask me anything about MERN stack development!`;
   }
   
   // Handle random question requests

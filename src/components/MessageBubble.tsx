@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Message } from '../types/chat';
 
 interface MessageBubbleProps {
@@ -19,7 +21,35 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, onClickText }) =
       } ${onClickText ? 'cursor-pointer hover:opacity-95 active:opacity-90' : ''}`}
         onClick={() => onClickText?.(message.text)}
       >
-        <p className="text-sm leading-relaxed">{message.text}</p>
+        {isUser ? (
+          <p className="text-sm leading-relaxed">{message.text}</p>
+        ) : (
+          <div className="text-sm leading-relaxed prose prose-sm max-w-none">
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                ul: ({ children }) => <ul className="list-disc list-inside mb-2">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-inside mb-2">{children}</ol>,
+                li: ({ children }) => <li className="mb-1">{children}</li>,
+                code: ({ children }) => (
+                  <code className="bg-gray-100 px-1 py-0.5 rounded text-xs font-mono">
+                    {children}
+                  </code>
+                ),
+                pre: ({ children }) => (
+                  <pre className="bg-gray-100 p-3 rounded-lg overflow-x-auto text-xs mb-2">
+                    {children}
+                  </pre>
+                ),
+                strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                em: ({ children }) => <em className="italic">{children}</em>,
+              }}
+            >
+              {message.text}
+            </ReactMarkdown>
+          </div>
+        )}
         <p className={`text-xs mt-1 ${
           isUser ? 'text-blue-100' : 'text-gray-500'
         }`}>

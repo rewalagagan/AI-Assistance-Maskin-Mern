@@ -99,6 +99,7 @@ const ChatInterface: React.FC = () => {
       <ChatInput 
         onSendMessage={handleSendMessage} 
         disabled={isTyping}
+        messages={messages}
       />
     </div>
   );

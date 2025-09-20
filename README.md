@@ -8,11 +8,14 @@ A lightweight chat-style learning assistant for the MERN stack. Built with React
 - Click any bubble to resend its text
 - Auto-scroll to the latest message
 - Persistent chat history (localStorage by default, optional sessionStorage)
+- **Markdown support** for bot responses (code blocks, lists, formatting)
+- **Contextual suggested prompts** that appear based on conversation history
 
 ## Tech Stack
 - Runtime/Build: Node.js, Vite
 - UI: React 18, TypeScript, Tailwind CSS
 - Icons: lucide-react
+- Markdown: react-markdown, remark-gfm
 - Linting: ESLint
 
 ## Project Structure
@@ -22,9 +25,10 @@ A lightweight chat-style learning assistant for the MERN stack. Built with React
   │  ├─ components/
   │  │  ├─ ChatInterface.tsx     # Main chat container
   │  │  ├─ ChatHeader.tsx        # Header with clear chat
-  │  │  ├─ ChatInput.tsx         # Message input + submit
+  │  │  ├─ ChatInput.tsx         # Message input + submit + suggestions
   │  │  ├─ EmptyState.tsx        # Landing suggestions (clickable)
-  │  │  ├─ MessageBubble.tsx     # Chat bubble (click-to-resend)
+  │  │  ├─ MessageBubble.tsx     # Chat bubble (click-to-resend, markdown support)
+  │  │  ├─ SuggestedPrompts.tsx  # Contextual prompt suggestions
   │  │  └─ TypingIndicator.tsx   # Bot typing indicator
   │  ├─ utils/
   │  │  ├─ storage.ts            # Local/session storage helpers
@@ -89,6 +93,8 @@ Notes:
 - `ChatInterface` manages state, auto-scroll, save/load history
 - `botResponses.ts` resolves responses using `mernStackData.ts`
 - `EmptyState` and `MessageBubble` are clickable to send text
+- `MessageBubble` renders markdown for bot messages with syntax highlighting
+- `SuggestedPrompts` shows contextual suggestions based on recent conversation
 - Typing delay simulates bot response
 
 ## Extending
